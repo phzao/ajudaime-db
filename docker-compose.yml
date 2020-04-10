@@ -7,6 +7,7 @@ services:
     environment:
       - cluster.name=docker-cluster
       - network.host=0
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USER}
       - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - xpack.security.audit.enabled=true
       - node.master=true
@@ -20,7 +21,7 @@ services:
     container_name: ajudaime-kibana
     environment:
       - elasticsearch.url=http://elasticsearch:9200
-      - elasticsearch.username=elastic
+      - elasticsearch.username=${ELASTICSEARCH_USER}
       - elasticsearch.password=${ELASTICSEARCH_PASSWORD}
       - xpack.monitoring.ui.container.elasticsearch.enabled=true
     ports:
