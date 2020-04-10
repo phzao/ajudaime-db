@@ -16,18 +16,18 @@ services:
     networks:
       - ajudaime-net
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:6.3.2
-    container_name: ajudaime-kibana
-    environment:
-      - elasticsearch.url=http://elasticsearch:9200
-      - elasticsearch.username=${ELASTICSEARCH_USER}
-      - elasticsearch.password=${ELASTICSEARCH_PASSWORD}
-      - xpack.monitoring.ui.container.elasticsearch.enabled=true
-    ports:
-      - "5601:5601"
-    networks:
-      - ajudaime-net
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:6.3.2
+#    container_name: ajudaime-kibana
+#    environment:
+#      - elasticsearch.url=http://elasticsearch:9200
+#      - elasticsearch.username=${ELASTICSEARCH_USER}
+#      - elasticsearch.password=${ELASTICSEARCH_PASSWORD}
+#      - xpack.monitoring.ui.container.elasticsearch.enabled=true
+#    ports:
+#      - "5601:5601"
+#    networks:
+#      - ajudaime-net
 
 networks:
   ajudaime-net:
