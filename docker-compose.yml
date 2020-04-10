@@ -1,37 +1,15 @@
 version: '3.5'
 
 services:
-#  helppostgresql:
-#    build: .
-#    container_name: ajudaime-postgres
-#    environment:
-#      POSTGRES_USER: ${POSTGRES_USER}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#      POSTGRES_DB: ${POSTGRES_DB}
-##      PGPASSFILE: '/.pgpass'
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - ./pgsql-data:/var/lib/postgresql/data
-#    networks:
-#      - ajudaime-net
-#
-#  helppgadmin4:
-#    image: dpage/pgadmin4
-#    container_name: ajudaime-pgadmin
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
-#    ports:
-#      - 8090:80
-#    links:
-#      - helppostgresql
-#    networks:
-#      - ajudaime-net
-
   elasticsearch:
     image: elasticsearch:6.5.0
     container_name: ajudaime-elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - network.host=0
+      - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - xpack.security.audit.enabled=true
+      - node.master=true
     ports:
       - "9200:9200"
     networks:
@@ -40,6 +18,11 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:6.3.2
     container_name: ajudaime-kibana
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+      - elasticsearch.username=elastic
+      - elasticsearch.password=${ELASTICSEARCH_PASSWORD}
+      - xpack.monitoring.ui.container.elasticsearch.enabled=true
     ports:
       - "5601:5601"
     networks:

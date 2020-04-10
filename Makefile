@@ -20,11 +20,4 @@ up:
 	@echo '************  Stopping DBs ************'
 	@echo '*'
 	@echo '*'
-	docker stop ajudaime-postgres ajudaime-pgadmin
-
-fix:
-	echo "host    all             all             0.0.0.0/0               md5" >> pgsql-data/pg_hba.conf
-
-	@echo '*'
-	@echo '*'
-	@echo '************  PostgreSQL configurado execute "docker-compose up" para iniciar ************'
+	docker stop ajudaime-elasticsearch ajudaime-kibana
